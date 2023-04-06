@@ -7,7 +7,8 @@ import { useFetch } from '../hooks/useFetch';
 function Home(props) {
     let locationRef = useRef('')
     const [location, setLocation] = useState('Iasi')
-    const apiKey = env.API_URL
+    const apiKey = env.API_KEY
+    const ai = '3d1fac81aaea40b6896132143230504'
    
     
     const testURL = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`
