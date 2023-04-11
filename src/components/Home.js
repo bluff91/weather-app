@@ -1,53 +1,27 @@
-import './Home.css'
-import { useEffect, useRef, useState } from 'react';
-import env from 'react-dotenv';
-import { useFetch } from '../hooks/useFetch';
-import Forecast from './Forecast';
+import { useTheme } from "../hooks/useTheme";
 
-
-function Home() {
-
-    let locationRef = useRef('')
-    const [location, setLocation] = useState('Iasi')
-    const apiKey = env.API_KEY
+function Home(props) {
    
-    const URL = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=no`
-    const {data, error, isPending} = useFetch(URL)
-    
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        setLocation(locationRef.current.value)
-        locationRef.current.value = ""
-        console.log(locationRef.current.value)
-    }
+    const {country, name:city, localtime } = props.location
+    const { condition:{text, icon}, feelslike_c:feelsLike, temp_c:temp, precip_mm:precip, wind_kph:wind } = props.current
+
+    const { color1, color2, color3, } = useTheme()
     
     return (
         <div className='home'>
-            <div className='singlecast'>
-                {isPending && <h1>Loading...</h1>}
-                {error && <h1>{error}</h1>}
-                {data &&
-                    <div className='single-card'>
-                        <div>{`${data.location.name}, ${data.location.country}`}</div>
-                        <div>{data.location.localtime}</div>
-                        <div>{data.current.condition.cloud}</div>
-                        <img src={data.current.condition.icon} alt=''/>
-                        <div>{data.current.condition.text}</div>
-                        <div>Temperature: {data.current.temp_c} °C</div>
-                        <div>Feels like: {data.current.feelslike_c} °C</div>
-                        <div>Wind: {data.current.wind_kph} km/h</div>
-                    </div>
-                }
-                <form onSubmit={handleSubmit}>
-                <input 
-                    type='text'
-                    placeholder='Location here'
-                    maxLength={25}
-                    ref={locationRef}
-                    />
-                </form>
+            <div className='singlecast' style={{backgroundColor:color1}}>
+                <div className='single-card' style={{borderColor:color3}} >
+                    <div className='single-card-location'><b>{`${city}, ${country}`}</b></div>
+                    <div>{localtime}</div>
+                    <img src={icon} alt='weather condtion icon'/>
+                    <div><b>{text}</b></div>
+                    <br/>
+                    <div>Temperature: {Math.ceil(temp)} °C</div>
+                    <div>Feels like: {Math.ceil(feelsLike)} °C</div>
+                    <div>Precipitations: {Math.ceil(precip)} mm/h</div>
+                    <div>Wind: {Math.ceil(wind)} km/h</div>
+                </div>
             </div>
-            {data && <Forecast location={location}/>}
         </div>
     );
 }

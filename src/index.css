@@ -1,48 +1,186 @@
-.temp-forecast {
-    display: flex;
-    background-color: aquamarine;
-    justify-content: center;
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.home {
-    background-color: #E3F4FE;
-    
-    
+.App {
+    height: 100vh;
 }
+
+.navbar {
+    background-color: #E3F4FE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+}
+
+.search-bar {
+    display: flex;
+    gap: 5px;
+}
+
+.search-bar input {
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-size: 2rem;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 2rem;
+    margin-top: 8px;
+}
+
+.icon:hover{
+    color: rgb(147, 77, 77);
+}
+
+.theme-selector {
+    margin-right: 50px;
+}
+
+.theme-buttons div {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+
+
 .singlecast {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: 1.8rem;
+    background-color: hsl(205, 33%, 62%);
+    padding: 10px;
 }
-.forecast-title {
-    margin: 0;
-    text-align: center;
-    background-color: aquamarine;
-    
-}
-.card {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 20px;
-    border: solid 2px red;
-    border-radius: 12px;
-    padding: 5px 15px;
-    align-items: center;
-    width: 300px;
-    gap: 5px;
-    background-color: #E3F4FE;
+
+.singlecast img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
+ 
 }
 
 .single-card {
-    border: solid 2px red;
     text-align: center;
     display: flex;
     flex-direction: column;
-    width: 300px;
     align-items: center;
+    background-color: #E3F4FE;
+    border: solid 0.2rem hsl(209, 34%, 30%);
+    border-radius: 8px;
+    padding: 8px 15px;
+    
+}
+
+.single-card-location {
+    font-size: 2.5rem;
+}
+
+
+.temp-forecast-container {
+    background-color: hsl(205, 33%, 62%);
+   
+}
+
+.temp-forecast {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding-top: 10px ;
+    justify-content: center;
+}
+
+.forecast-title {
+    margin: 0;
+    text-align: center;
+    background-color:#E3F4FE;
+    padding: 0.5rem;
+}
+
+.forecast-card {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 20px;
+    border: solid 0.2rem hsl(209, 34%, 30%);
+    border-radius: 12px;
+    padding: 10px 15px;
+    align-items: center;
+    width: auto;
+    gap: 5px;
+    background-color: #E3F4FE;  
 }
 
 .p {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+@media screen and (max-width: 1750px) {
+    .temp-forecast {
+        grid-template-columns: repeat(5, 1fr);
+        
+    }  
+}
+
+@media screen and (max-width: 1300px) {
+    .temp-forecast {
+        grid-template-columns: repeat(4, 1fr);
+        
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .temp-forecast {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .search-bar input {
+        font-size: 1rem;
+    }
+    .icon {
+        font-size: 1.2rem;
+        margin-top: 6px;
+    }
+    .theme-selector {
+        margin-right: 5px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .temp-forecast {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .navbar h2 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .temp-forecast {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .navbar input {
+        width: 130px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .theme-selector {
+        margin-right: 0px;
+        margin-left:20px;
+    }
+    .search-bar {
+        margin-left: 30px
+    }
+  
+    .navbar input {
+        width: 130px;
+    }
+}
+
